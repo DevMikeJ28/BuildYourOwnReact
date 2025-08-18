@@ -39,7 +39,7 @@ Sau khi hoàn thành, dev phải:
    - Capturing trong event handler la viec ma cac ham handler (ham xu ly su kien) se duoc thuc hien khong theo thu tu noi bot thong thuong nua ma element duoc captrue se thuc hien truoc roi moi toi thu tu noi bot -> toi DOM (Thu tu tu element duoc capture -> con duoc capture -> khi het capture thi toi noi bot )
    - ![alt text](image-2.png)
  - --> Mở rộng hơn là vì sao khi click vào phần tử trên cùng thì lại chạy 100 dòng lệnh console?
- - Vì khi click thì sự kiện được chạy là sự kiện của của element div, trong đó có 100 thẻ li nên khi click vào 1 li -> sự kiện đó sẽ được truyền lên ông nội là div, và div sẽ phải thực hiện xác định xem đâu là phần tử xảy ra sự kiện nên mỗi lần lặp sẽ tạo ra 1 function từ đó sinh là 100 dòng log.
+ - Là do code đang gán 100 hàm xử lý sự kiện click vào element có id là listData nên 100 hàm đó được thực hiện nên có tới 100 dòng log.
 ---
 
 ## 📂 Deliverables
