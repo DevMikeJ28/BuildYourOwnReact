@@ -28,12 +28,18 @@ Sau khi hoàn thành, dev phải:
 ### 2. Bài tập bắt buộc
 - [ X ] **Bài 1:** Tạo một danh sách `<ul>` từ một mảng dữ liệu JS.  
 - [ X ] **Bài 2:** Thêm mới và xóa phần tử `<li>` trong danh sách bằng button.  
-- [ ] **Bài 3:** Sử dụng event delegation để xử lý click trên từng `<li>` (không gắn listener cho từng item).  
-- [ ] **Bài 4:** Render 1000 item vào DOM và so sánh hiệu năng giữa:
-  - Thêm trực tiếp từng item vào DOM.
-  - Dùng `DocumentFragment` để tối ưu.  
-- [ ] **Bài 5:** Viết ví dụ sử dụng bubbling và capturing để log event order.
-
+- [ X ] **Bài 3:** Sử dụng event delegation để xử lý click trên từng `<li>` (không gắn listener cho từng item).  
+- [ X ] **Bài 4:** Render 1000 item vào DOM và so sánh hiệu năng giữa:
+  - Thêm trực tiếp từng item vào DOM. --> 1.921875 ms
+  - Dùng `DocumentFragment` để tối ưu. --> 0.55712890625 ms
+  - ![alt text](image.png)
+- [ X ] **Bài 5:** Viết ví dụ sử dụng bubbling và capturing để log event order.
+   - Bubbling trong event handler la viec ma cac ham handler (ham xu ly su kien) se duoc thuc hien theo thu tu tu phan tu con -> phan tu cha -> toi DOM:
+   ![alt text](image-1.png)
+   - Capturing trong event handler la viec ma cac ham handler (ham xu ly su kien) se duoc thuc hien khong theo thu tu noi bot thong thuong nua ma element duoc captrue se thuc hien truoc roi moi toi thu tu noi bot -> toi DOM (Thu tu tu element duoc capture -> con duoc capture -> khi het capture thi toi noi bot )
+   - ![alt text](image-2.png)
+ - --> Mở rộng hơn là vì sao khi click vào phần tử trên cùng thì lại chạy 100 dòng lệnh console?
+ - Vì khi click thì sự kiện được chạy là sự kiện của của element div, trong đó có 100 thẻ li nên khi click vào 1 li -> sự kiện đó sẽ được truyền lên ông nội là div, và div sẽ phải thực hiện xác định xem đâu là phần tử xảy ra sự kiện nên mỗi lần lặp sẽ tạo ra 1 function từ đó sinh là 100 dòng log.
 ---
 
 ## 📂 Deliverables
