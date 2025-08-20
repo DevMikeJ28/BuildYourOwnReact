@@ -135,11 +135,11 @@ virtual-dom-assignment/
 
 ## ✅ Acceptance Criteria
 
-- [x] `createElement` tạo đúng Virtual DOM object
-- [x] `render` chuyển Virtual DOM thành DOM thật chính xác
-- [x] Demo chạy ra đúng giao diện (h1, p, ul > li)
-- [x] Code sạch, có comment ngắn gọn cho mỗi function
-- [x] README giải thích rõ Virtual DOM và lợi ích
+- [ X ] `createElement` tạo đúng Virtual DOM object
+- [ X ] `render` chuyển Virtual DOM thành DOM thật chính xác
+- [ X ] Demo chạy ra đúng giao diện (h1, p, ul > li)
+- [  ] Code sạch, có comment ngắn gọn cho mỗi function
+- [ X ] README giải thích rõ Virtual DOM và lợi ích --> file DomAndVDom.txt
 
 ---
 

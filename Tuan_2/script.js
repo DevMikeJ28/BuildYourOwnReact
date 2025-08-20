@@ -1,82 +1,131 @@
-/**
- * Week 2 – Virtual DOM Implementation
- * -----------------------------------
- * Mục tiêu: Tạo hàm createElement và render để mô phỏng cách React hoạt động cơ bản.
- */
+const createTextElement = (child) => {
+  const textElement = document.createElement();
 
-/**
- * Tạo Virtual DOM node
- * @param {string|function} type - Loại element (vd: "div", "h1")
- * @param {object|null} props - Thuộc tính của element
- * @param  {...any} children - Danh sách children (text hoặc Virtual DOM khác)
- * @returns Virtual DOM object
- */
-function createElement(type, props, ...children) {
-  return {
-    type,
-    props: {
-      ...props,
-      children: children.map((child) =>
-        typeof child === "object" ? child : createTextElement(child)
-      ),
-    },
-  };
-}
-
-/**
- * Tạo Virtual DOM node cho text
- * @param {string|number} text
- */
-function createTextElement(text) {
-  return {
-    type: "TEXT_ELEMENT",
-    props: {
-      nodeValue: text,
-      children: [],
-    },
-  };
-}
-
-/**
- * Render Virtual DOM thành DOM thật
- * @param {object} vdom - Virtual DOM object
- * @param {HTMLElement} container - DOM node sẽ mount vào
- */
-function render(vdom, container) {
-  const dom =
-    vdom.type === "TEXT_ELEMENT"
-      ? document.createTextNode("")
-      : document.createElement(vdom.type);
-
-  // Gán props (trừ children)
-  for (const prop in vdom.props) {
-    if (prop !== "children") {
-      dom[prop] = vdom.props[prop];
-    }
+  try {
+    textElement.textContent = child.props.text ?? "";
+    textElement.className = child.props.className ?? "";
+    textElement.style = child.props.style ?? "";
+  } catch (error) {
+    console.log(`Error create new Text Element:: ${error}`);
   }
 
-  // Render children
-  vdom.props.children.forEach((child) => render(child, dom));
+  return textElement;
+};
 
-  container.appendChild(dom);
-}
+const createElement = ({ type, props, childrens }) => {
+  const newElement = document.createElement(type);
 
-/** ------------------------------
- *  Demo sử dụng Virtual DOM
- * ------------------------------- */
-const vdom = createElement(
-  "div",
-  { id: "root" },
-  createElement("h1", null, "Hello World"),
-  createElement("p", null, "This is a paragraph"),
-  createElement(
-    "ul",
-    null,
-    createElement("li", null, "Item 1"),
-    createElement("li", null, "Item 2")
-  )
-);
+  try {
+    newElement.textContent = props.text ?? "";
+    newElement.className = props.className ?? "";
+    newElement.style = props.style ?? "";
+    props.key ? (newElement.id = props.key) : null;
 
-// Render vào #app
-const root = document.getElementById("app");
-render(vdom, root);
+    for (child of childrens) {
+      const childElement = child.type.length
+        ? createElement(child)
+        : createTextElement(child);
+
+      newElement.appendChild(childElement);
+    }
+
+    return newElement;
+  } catch (error) {
+    console.log(`Error create new Element:: ${error}`);
+  }
+
+  return newElement;
+};
+
+const main = () => {
+  const nodeDemo = {
+    type: "h1",
+    props: {
+      text: "Hello World!",
+      style: "font-size: 20px; color: aqua",
+      className: "class='demoClass'",
+    },
+    childrens: [
+      {
+        type: "span",
+        props: {
+          text: "Day la node con",
+          style: "font-size: 16px; color: aqua",
+          className: "class='demoClass'",
+        },
+        childrens: [
+          {
+            type: "ul",
+            props: {
+              text: "",
+              style: "",
+              className: "class='ulClass'",
+            },
+            childrens: [
+              {
+                type: "li",
+                props: {
+                  key: "list 1",
+                  text: "list 1",
+                  style: "font-size: 16px; color: red",
+                  className: "class='liClass'",
+                },
+                childrens: [],
+              },
+              {
+                type: "li",
+                props: {
+                  text: "list 2",
+                  key: "list 2",
+                  style: "font-size: 16px; color: red",
+                  className: "class='liClass'",
+                },
+                childrens: [],
+              },
+              {
+                type: "li",
+                props: {
+                  text: "list 3",
+                  key: "list 3",
+                  style: "font-size: 16px; color: red",
+                  className: "class='liClass'",
+                },
+                childrens: [],
+              },
+              {
+                type: "li",
+                props: {
+                  text: "list 4",
+                  key: "list 4",
+                  style: "font-size: 16px; color: red",
+                  className: "class='liClass'",
+                },
+                childrens: [],
+              },
+              {
+                type: "li",
+                props: {
+                  text: "list 5",
+                  key: "list 5",
+                  style: "font-size: 16px; color: red",
+                  className: "class='liClass'",
+                },
+                childrens: [],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+
+  const app = document.getElementById("app");
+  try {
+    const newNode = createElement(nodeDemo);
+    app.appendChild(newNode);
+  } catch (error) {
+    console.error(`Error:: ${error}`);
+  }
+};
+
+main();

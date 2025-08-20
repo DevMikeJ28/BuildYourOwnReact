@@ -1,0 +1,24 @@
+--> So sánh giữa Virtual DOM và DOM thật:
+
+	DOM là API để giúp browser có thể hiển thị thông tin và giúp người dùng có thể tương tác với những thông tin đó.
+	Virtual DOM là 1 DOM ảo, nhẹ hơn và được dùng bộ nhớ để lưu trữ. VDOM sẽ được js biểu diễn dưới các dạng object để theo dõi sự thay đổi của các trạng thái của từng phần tử từ đó update phần tử đó khi cần thiết, tránh việc thay đổi toàn bộ DOM.
+
+--> Cách VDOM thực hiện:
+	VDOM sẽ biểu diễn dao diện dưới dạng cây object giống như DOM
+	Mỗi khi copmponent có sự thay đổi, VDOM mới sẽ được tạo ra.
+	React sẽ so sánh VDOM mới được tạo với VDOM trước đó và cập nhật những component có state thay đổi.
+	Sau khi đã xác định được những component có sự thay đổi, những component đó sẽ được áp dụng vào DOM thật để từ đó hiển thị lên dao diện cho người dùng.
+
+--> Những tối ưu của VDOM:
+	Tối ưu được việc update: Vì chỉ VDOM đã giúp xác định những component có sự thay đổi nên việc update lên dao diện người dùng sẽ diễn ra nhanh hơn (toàn bộ những componet có sự thay đổi sẽ được update trong 1 lần), tốn ít tài nguyên hơn, giảm thời gian update.
+	
+
+--> Quy trình so sánh của VDOM trước và sau khi update:
+	--> Khi 1 component được update, React sẽ render lại component đó nhưng thay vì update trực tiếp vào DOM thật, component đó sẽ được đưa vào VDOM và sử dụng thuật toán Diff để có thể so sánh 2 phiên bản của VDOM:
+	+, Đầu tiên, thuật toán sẽ so sánh element tag, nếu như element bị thay đổi thì toàn bộ node của element cũ sẽ được xóa đi và thay vào đó là nội dung của element mới.
+	+, Nếu như element vẫn được giữ nguyên, thuật toán sẽ tiếp tục so sánh các thuộc tính và props, nếu như có sự thay đổi thì sẽ áp dụng những sự thay đổi đó vào element.
+	+, Cuối cùng là so sánh những phần tử con, React sẽ sử dụng những key để có thể theo dõi, xác định việc thêm, sửa, xóa các phần tử con trong element đó từ đó xác định việc update sao cho hợp lý.
+	--> Sao khi thuật toán đã xác định được những phần cần update, React sẽ update những phần cần update vào DOM thật từ đó tạo thay đổi trên dao diện người dùng.
+
+
+			
