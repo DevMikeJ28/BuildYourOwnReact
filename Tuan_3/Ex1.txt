@@ -1,0 +1,13 @@
+Reconciliation: 
+Là cơ chế nội bộ của React giúp React xác định được đâu là node cần được update và giúp giảm thiểu thời gian so sánh giữa các node,
+tăng hiệu suất làm việc của React.
+
+Diff heuristic: 
+Thông thường, để so sánh 2 cây VDOM, thuật toán sẽ so sánh từng của từng node đó nên sẽ có phức tạp là O(n^3) vì sẽ phải so sánh từng node của 2 cây, 
+sau đó là node con và subtree của từng node đó. Tức là nếu như 1 cây có khoảng 1000 node thì thuật toán sẽ phải có 1000 lượt so sánh các node từ đó 
+tạo thành việc kém hiệu xuất. Từ đó thì thuật toán diff heuristic được áp dụng để có thể cải thiện tốc độ so sánh, giúp tăng hiệu suất của react. 
+
+Compare: 
+Đầu tiên React sẽ so sánh các element, nếu như element nào đó có sự thay đổi thì react sẽ xóa toàn bộ các node con của element đó, tạo lại elment 
+và các node con của element đó. Tiếp đó, React sẽ so sánh các attribute của node đó, nếu như có sự thay đổi thì sẽ cập nhật attribute mới. 
+Cuối cùng là so sánh giữa các node con, nếu như các node con có sự thay đổi thì sẽ cập nhật các node con đó.

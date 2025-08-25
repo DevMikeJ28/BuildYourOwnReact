@@ -4,7 +4,7 @@
 
 - ✅ Hiểu và mô phỏng được thuật toán diff heuristic mà React dùng để so sánh giữa 2 VDOM.
 - ✅ Biết cách chỉ update thay đổi thay vì toàn bộ như VDOM.
-- ✅ Tìm hiểu về fiber và cách mà chỉ re-render 1 lần thay vì mỗi lần khi có state thay đổi.
+- ✅ Tìm hiểu về fiber và cách mà chỉ re-render 1 lần thay vì mỗi lần khi có state thay đổi.  (Chuyển sang tuần 5 )
 
 ## 📝 Bài tập thực hành:
 
